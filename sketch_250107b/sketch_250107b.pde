@@ -14,8 +14,10 @@ void setup () {
   // This can be the class for the background and ig we can import our images and stuff here too.
     size(900,900);
     background (255);
-    myImage = loadImage("C:\\Users\\sterling.cossar\\Downloads\\BIRD-removebg-preview.png");
+  size(400,400);
+  myImage = loadImage("C:\Users\sterling.cossar\Downloads\BIRD-removebg-preview.png");
 }
+
 void draw() {
   background(255);
   //draws blue rect
@@ -27,4 +29,12 @@ void draw() {
   //blue 
   fill(95,190,255);
   image(myImage,10,10);
+}
+
+class Bird {
+  
+}
+
+class Pipes {
+
 }
