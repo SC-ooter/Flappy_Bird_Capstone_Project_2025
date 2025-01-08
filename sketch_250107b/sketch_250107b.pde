@@ -3,7 +3,7 @@ void setup () {
   // This can be the class for the background and ig we can import our images and stuff here too.
     size(900,900);
     background (255);
-    myImage = loadImage(""C:\Users\sterling.cossar\OneDrive - RCSD\Flappy_Bird_Capstone_Project_2025\BIRD.jpg"");
+    myImage = loadImage("C:\\Users\\sterling.cossar\\OneDrive - RCSD\\Flappy_Bird_Capstone_Project_2025\BIRD.jpg");
 
 }
 void draw() {
