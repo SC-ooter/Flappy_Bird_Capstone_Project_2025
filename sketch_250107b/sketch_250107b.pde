@@ -1,3 +1,13 @@
+int birdY = height / 2;
+int birdVelocity = 0;
+int gravity = 1;
+int lift = -15;
+int birdSize = 20;
+
+int pipeWidth = 50;
+int pipeGap = 150; 
+// ArrayList<Pipe> pipes = new ArrayList<Pipe>();
+
 void setup () {
   // This can be the class for the background and ig we can import our images and stuff here too.
     size(900,900);
