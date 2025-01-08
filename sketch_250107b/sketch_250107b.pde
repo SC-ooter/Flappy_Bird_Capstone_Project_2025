@@ -1,4 +1,4 @@
-PImage myImage;
+PImage birdimg;
 
 int birdY = height / 2;
 int birdVelocity = 0;
@@ -14,8 +14,7 @@ void setup () {
   // This can be the class for the background and ig we can import our images and stuff here too.
     size(900,900);
     background (255);
-  size(400,400);
-  myImage = loadImage("C:\Users\sterling.cossar\Downloads\BIRD-removebg-preview.png");
+  birdimg = loadImage("BIRD-removebg-preview.png");
 }
 
 void draw() {
@@ -28,7 +27,7 @@ void draw() {
   rect(width/2-100,0,width/6,500);
   //blue 
   fill(95,190,255);
-  image(myImage,10,10);
+  image(birdimg, width/6, height/2, width/8, height/8);
 }
 
 class Bird {
