@@ -6,9 +6,6 @@ void setup () {
     myImage = loadImage(""C:\Users\sterling.cossar\OneDrive - RCSD\Flappy_Bird_Capstone_Project_2025\BIRD.jpg"");
 
 }
-void character() {
-  
-}
 void draw() {
   background(255);
   //draws blue rect
