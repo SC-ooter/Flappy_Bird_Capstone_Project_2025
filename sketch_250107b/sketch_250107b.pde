@@ -1,6 +1,5 @@
-<<<<<<< HEAD
 PImage myImage;
-=======
+
 int birdY = height / 2;
 int birdVelocity = 0;
 int gravity = 1;
@@ -11,13 +10,11 @@ int pipeWidth = 50;
 int pipeGap = 150; 
 // ArrayList<Pipe> pipes = new ArrayList<Pipe>();
 
->>>>>>> 4eec81bacb28958d170a6d933a06ea609e6e5b1a
 void setup () {
   // This can be the class for the background and ig we can import our images and stuff here too.
     size(900,900);
     background (255);
-    myImage = loadImage("C:\\Users\\sterling.cossar\\OneDrive - RCSD\\Flappy_Bird_Capstone_Project_2025\BIRD.jpg");
-
+    myImage = loadImage("C:\\Users\\sterling.cossar\\Downloads\\BIRD-removebg-preview.png");
 }
 void draw() {
   background(255);
