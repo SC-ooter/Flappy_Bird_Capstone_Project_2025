@@ -1,4 +1,17 @@
+<<<<<<< HEAD
 PImage myImage;
+=======
+int birdY = height / 2;
+int birdVelocity = 0;
+int gravity = 1;
+int lift = -15;
+int birdSize = 20;
+
+int pipeWidth = 50;
+int pipeGap = 150; 
+// ArrayList<Pipe> pipes = new ArrayList<Pipe>();
+
+>>>>>>> 4eec81bacb28958d170a6d933a06ea609e6e5b1a
 void setup () {
   // This can be the class for the background and ig we can import our images and stuff here too.
     size(900,900);
