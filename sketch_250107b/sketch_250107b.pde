@@ -1,9 +1,7 @@
-<<<<<<< HEAD
+
 PImage birdimg;
 
-=======
-<<<<<<< HEAD
->>>>>>> 022fd54006530d3189e4cef7e56dc660bfd45f84
+
 int birdY = height / 2;
 int birdVelocity = 0;
 int gravity = 1;
@@ -14,21 +12,17 @@ int pipeWidth = 50;
 int pipeGap = 150; 
 // ArrayList<Pipe> pipes = new ArrayList<Pipe>();
 
-=======
+
 PImage myImage;
->>>>>>> 08c1ce0fa639ae7261ed217486d767aef7ac6102
+
 void setup () {
   // This can be the class for the background and ig we can import our images and stuff here too.
     size(900,900);
     background (255);
-<<<<<<< HEAD
-  birdimg = loadImage("BIRD-removebg-preview.png");
+    birdimg = loadImage("BIRD-removebg-preview.png");
 }
-=======
-    myImage = loadImage(""C:\Users\sterling.cossar\OneDrive - RCSD\Flappy_Bird_Capstone_Project_2025\BIRD.jpg"");
->>>>>>> 022fd54006530d3189e4cef7e56dc660bfd45f84
 
-}
+
 void draw() {
   background(255);
   //draws blue rect
@@ -40,15 +34,52 @@ void draw() {
   //blue 
   fill(95,190,255);
   image(birdimg, width/6, height/2, width/8, height/8);
+  
+  // Bird position 
+  birdVelocity += gravity;
+  birdY = height - birdSize;
+  birdVelocity = 0;
+  
+  // Boundary control
+  if (birdY > height - birdSize) {
+    birdY = height - birdSize;
+    birdVelocity = 0;
+  }
 }
-<<<<<<< HEAD
+
+// To make the bird jump
+void keyPressed() {
+  if (key == ' ' || key == 'w' || key == 'W') {
+    birdVelocity = lift;
+  }
+}
+
 
 class Bird {
+  double x, y, velocity, size;
+  PImage img;
   
+  Bird(double startX, double startY, double birdSize, PImage birdImg) {
+    x = startX;
+    y = startY;
+    velocity = 0;
+    size = birdSize;
+    img = birdImg;
+  }
+  
+  void update() {
+    velocity += gravity;
+    y += velocity;
+    if (y > height - size) {
+      y = height - size;
+      velocity = 0;
+    }
+  }
+  
+  void jump() {
+    velocity = lift;
+  }
 }
-
+  
 class Pipes {
-
-}
-=======
->>>>>>> 022fd54006530d3189e4cef7e56dc660bfd45f84
+  }
