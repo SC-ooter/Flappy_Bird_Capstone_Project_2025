@@ -36,13 +36,13 @@ void draw() {
   image(birdimg, width/6, height/2, width/8, height/8);
   
   // Bird position 
-  birdVelocity += gravity
+  birdVelocity += gravity;
   birdY = height - birdSize;
   birdVelocity = 0;
   
   // Boundary control
   if (birdY > height - birdSize) {
-    birdY = height - birdsize;
+    birdY = height - birdSize;
     birdVelocity = 0;
   }
 }
