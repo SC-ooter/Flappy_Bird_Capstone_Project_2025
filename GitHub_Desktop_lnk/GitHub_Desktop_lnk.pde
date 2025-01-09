@@ -33,7 +33,7 @@ void draw() {
   rect(width/2-100,0,width/6,500);
   //blue 
   fill(95,190,255);
-  image(birdimg, width/6, height/2, width/8, height/8);
+  image(birdimg, width/6, height/2, 20, 20);
   
   // Bird position 
   birdVelocity += gravity;
