@@ -59,7 +59,7 @@ class Bird {
   double x, y, velocity, size;
   PImage img;
   
-  Bird(double startX, double startY, double birdsize, PImage birdImg) {
+  Bird(double startX, double startY, double birdSize, PImage birdImg) {
     x = startX;
     y = startY;
     velocity = 0;
