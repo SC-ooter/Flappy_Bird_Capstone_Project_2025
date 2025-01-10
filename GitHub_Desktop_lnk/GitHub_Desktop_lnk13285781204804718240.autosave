@@ -14,7 +14,7 @@ void setup() {
     size(900,900);
     birdY = height / 2;
     birdimg = loadImage("BIRD-removebg-preview.png");
-    bird = new Bird(birdimg, width / 6, iheight / 2, 20, 20);
+    int bird = new Bird(birdimg, width/6, height/2, 20, 20);
 }
 
 void draw() {
@@ -50,7 +50,7 @@ void draw() {
     Pipes p = pipes.get(i);
     p.update();
     p.show();
-    if (pipes.offScreen()) {
+    if (p.offScreen()) {
       pipes.remove(i);
     }
   }
@@ -65,11 +65,11 @@ void keyPressed() {
 }
 
 
-public class Bird {
-  float x, y, velocity, size;
+class Bird {
+  double x, y, velocity, size;
   PImage img;
   
-  Bird(float startX, float startY, float birdSize, PImage birdImg) {
+  Bird(double startX, double startY, double birdSize, PImage birdImg) {
     x = startX;
     y = startY;
     velocity = 0;
@@ -91,13 +91,13 @@ public class Bird {
   }
 }
   
-public class Pipes {
-  float x, top, bottom, width; 
-  float speed = 5; 
+class Pipes {
+  double x, top, bottom, width; 
+  double speed = 5; 
   boolean scored = false; 
 
 
-  Pipes(float startX, fl topHeight, double gapHeight){
+  Pipes(double startX, double topHeight, double gapHeight){
     x = startX;
     top = topHeight;
     bottom = top + gapHeight;
@@ -125,5 +125,3 @@ public class Pipes {
     return false;
   }
 }
-
-

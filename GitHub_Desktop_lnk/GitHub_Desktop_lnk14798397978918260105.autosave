@@ -6,15 +6,15 @@ int lift = -15;
 int birdSize = 20;
 //int pipeWidth = 50;
 //int pipeGap = 150; 
-ArrayList<Pipes> pipes = new ArrayList<Pipes>();
-int frameCounter = 0;
+ArrayList<Pipe> pipes = new ArrayList<Pipe>();
+frameCount = 0;
 
 void setup() {
   // This can be the class for the background and ig we can import our images and stuff here too.
     size(900,900);
     birdY = height / 2;
     birdimg = loadImage("BIRD-removebg-preview.png");
-    bird = new Bird(birdimg, width / 6, iheight / 2, 20, 20);
+    // bird = new Bird(birdimg, width/6, height/2, 20, 20);
 }
 
 void draw() {
@@ -40,22 +40,7 @@ void draw() {
   }
   
   image(birdimg, width / 6, birdY, 100, 100 );
-
-  if (frameCounter % 100 == 0) {
-    pipes.add(new Pipes(width, random(150, height - 300), 150));
-  }
-  frameCounter++;
-
-  for (int i = pipes.size() - 1; i >= 0; i--) {
-    Pipes p = pipes.get(i);
-    p.update();
-    p.show();
-    if (pipes.offScreen()) {
-      pipes.remove(i);
-    }
-  }
 }
-
 
 // To make the bird jump
 void keyPressed() {
@@ -65,11 +50,11 @@ void keyPressed() {
 }
 
 
-public class Bird {
-  float x, y, velocity, size;
+class Bird {
+  double x, y, velocity, size;
   PImage img;
   
-  Bird(float startX, float startY, float birdSize, PImage birdImg) {
+  Bird(double startX, double startY, double birdSize, PImage birdImg) {
     x = startX;
     y = startY;
     velocity = 0;
@@ -91,13 +76,12 @@ public class Bird {
   }
 }
   
-public class Pipes {
-  float x, top, bottom, width; 
-  float speed = 5; 
+class Pipes {
+  double x, top, bottom, width; 
+  double speed = 5; 
   boolean scored = false; 
 
-
-  Pipes(float startX, fl topHeight, double gapHeight){
+  Pipe(double startX, double topHeight, double gapHeight){
     x = startX;
     top = topHeight;
     bottom = top + gapHeight;
@@ -119,11 +103,11 @@ public class Pipes {
   }
 
   boolean hits() {
-    if (birdY + birdSize > top && birdY < bottom && width / 6 + birdSize > x && width / 6 < x + width) {
+    if (birdY + birdSize > top && birdY < bottom && width / 6 + 50 > && width / 6 + width) {
       return true;
     }
     return false;
   }
+
+
 }
-
-

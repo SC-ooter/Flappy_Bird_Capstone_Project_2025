@@ -14,7 +14,7 @@ void setup() {
     size(900,900);
     birdY = height / 2;
     birdimg = loadImage("BIRD-removebg-preview.png");
-    bird = new Bird(birdimg, width / 6, iheight / 2, 20, 20);
+    int bird = new Bird(birdimg, width/6, height/2, 20, 20);
 }
 
 void draw() {
@@ -42,7 +42,7 @@ void draw() {
   image(birdimg, width / 6, birdY, 100, 100 );
 
   if (frameCounter % 100 == 0) {
-    pipes.add(new Pipes(width, random(150, height - 300), 150));
+    pipes.add(new Pipe(width, random(150, height - 300), 150));
   }
   frameCounter++;
 
@@ -65,7 +65,7 @@ void keyPressed() {
 }
 
 
-public class Bird {
+class Bird {
   float x, y, velocity, size;
   PImage img;
   
@@ -91,7 +91,7 @@ public class Bird {
   }
 }
   
-public class Pipes {
+class Pipes {
   float x, top, bottom, width; 
   float speed = 5; 
   boolean scored = false; 
@@ -125,5 +125,3 @@ public class Pipes {
     return false;
   }
 }
-
-
