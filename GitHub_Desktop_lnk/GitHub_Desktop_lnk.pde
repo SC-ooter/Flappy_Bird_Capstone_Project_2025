@@ -1,7 +1,7 @@
 PImage birdimg;
 int birdY;
 int birdVelocity = 0;
-int gravity = 1;
+double gravity = 1;
 int lift = -15;
 int birdSize = 20;
 //int pipeWidth = 50;
