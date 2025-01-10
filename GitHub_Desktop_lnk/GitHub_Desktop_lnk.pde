@@ -1,43 +1,44 @@
 PImage birdimg;
-int birdY = height / 2;
+int birdY;
 int birdVelocity = 0;
 int gravity = 1;
 int lift = -15;
 int birdSize = 20;
-int pipeWidth = 50;
-int pipeGap = 150; 
+//int pipeWidth = 50;
+//int pipeGap = 150; 
 // ArrayList<Pipe> pipes = new ArrayList<Pipe>();
 
 void setup () {
   // This can be the class for the background and ig we can import our images and stuff here too.
     size(900,900);
-    background (255);
+    birdY = height / 2;
     birdimg = loadImage("BIRD-removebg-preview.png");
     // bird = new Bird(birdimg, width/6, height/2, 20, 20);
 }
 
 void draw() {
+  
   background(255);
-  //draws blue rect
-  rect(0,0,1000,600);
-  //green
-  fill(0,215,0);
-  //draws green rect
-  rect(width/2-100,0,width/6,500);
-  //blue 
-  fill(95,190,255);
-  image(birdimg, width/6, height/2, 200, 200);
+  // Blue sky
+  fill(95, 190, 255);
+  rect(0,0, width, height);
   
-  // Bird position 
+  // Green ground
+  fill(0, 215, 0);
+  rect(0 , height - 100, width, 100);
+
+  
+  // Updating bird's position 
   birdVelocity += gravity;
-  birdY = height - birdSize;
-  birdVelocity = 0;
+  birdY += birdVelocity;
   
-  // Boundary control
-  if (birdY > height - birdSize) {
-    birdY = height - birdSize;
+  // Boundary control so the bird does not go below the screen
+  if (birdY > height - 100 - birdSize) {
+    birdY = height - 100 - birdSize;
     birdVelocity = 0;
   }
+  
+  image(birdimg, width / 6, birdY, 100, 100 );
 }
 
 // To make the bird jump
@@ -74,4 +75,3 @@ class Bird {
   }
 }
   
-
