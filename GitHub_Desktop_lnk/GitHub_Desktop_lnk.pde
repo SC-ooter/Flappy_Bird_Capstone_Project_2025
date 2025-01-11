@@ -6,7 +6,11 @@ int lift = -15;
 int birdSize = 20;
 //int pipeWidth = 50;
 //int pipeGap = 150; 
+<<<<<<< Updated upstream
 ArrayList<Pipes> pipes = new ArrayList<Pipes>();
+=======
+ArrayList<Pipe> pipes = new ArrayList<Pipe>();
+>>>>>>> Stashed changes
 int frameCounter = 0;
 
 void setup() {
@@ -39,7 +43,9 @@ void draw() {
     birdVelocity = 0;
   }
   
+  // Drawing the bird
   image(birdimg, width / 6, birdY, 100, 100 );
+<<<<<<< Updated upstream
 
   if (frameCounter % 100 == 0) {
     pipes.add(new Pipes(width, random(150, height - 300), 150));
@@ -53,6 +59,27 @@ void draw() {
     if (pipes.offScreen()) {
       pipes.remove(i);
     }
+=======
+  
+  if (frameCounter % 100 == 0) {
+    pipes.add(new Pipe(width, random(200, height - 400), 250));
+  }
+  frameCounter++;
+  
+  // Update and displaying the pipes
+  for (int i = pipes.size() - 1; i >= 0; i--) {
+    Pipe p = pipes.get(i);
+    p.update();
+    p.show();
+    
+    if (p.offScreen()) {
+      pipes.remove(i);
+    }
+    
+    if (p.hits(birdY, birdSize)) {
+      noLoop();
+    } 
+>>>>>>> Stashed changes
   }
 }
 
@@ -88,6 +115,44 @@ public class Bird {
   
   void jump() {
     velocity = lift;
+  }
+}
+
+class Pipe {
+  float x, top, bottom, width;
+  float speed = 5;
+  
+  Pipe(float startX, float topHeight, float gapHeight) {
+    x = startX;
+    top = topHeight;
+    bottom = top + gapHeight;
+    width = 50;
+  }
+  
+  void update() {
+    x -= speed;
+  }
+  
+  void show() {
+    fill (0, 255, 0);
+    rect(x, 0, width, top); // Top pipes 
+    rect(x, bottom, width, height - bottom);
+  }
+  
+  boolean offScreen() {
+    return x + width < 0;
+  }
+  
+  boolean hits(int birdY, int birdSize) {
+    // Checking if the bird is in the pipe's range
+    boolean horzCollision = (birdY + birdSize > top && birdY < bottom && width / 6 + 100 > x && width / 6 < x + width);
+    
+    if (horzCollision) {
+      if (birdY < top || birdY + birdSize > bottom) {
+        return true;
+      }
+    }
+    return false; // No collisions occur 
   }
 }
   
