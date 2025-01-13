@@ -44,7 +44,7 @@ void draw() {
   }
 
   // Draw bird
-  image(birdimg, width / 6, birdY, 50, 50);
+  image(birdimg, width / 6, birdY, 100, 100);
 
   // Pipe management
   if (frameCounter % 100 == 0) {
@@ -64,7 +64,7 @@ void draw() {
     }
 
     // Check for collisions
-    if (p.collides(width / 6, birdY, birdSize)) {
+    if (p.collides(birdX, birdY, birdSize)) {
       noLoop(); // Stop the game
     }
   }
@@ -89,7 +89,7 @@ class Pipe {
   }
 
   void update() {
-    x -= 3; // Move pipe to the left
+    x -= 2; // Move pipe to the left
   }
 
   void show() {

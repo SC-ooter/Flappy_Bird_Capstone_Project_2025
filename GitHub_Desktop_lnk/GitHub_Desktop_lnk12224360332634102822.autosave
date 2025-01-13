@@ -1,4 +1,4 @@
-     PImage birdimg;
+   PImage birdimg;
 float birdY;
 float birdX;
 float birdVelocity = 0;
@@ -44,7 +44,7 @@ void draw() {
   }
 
   // Draw bird
-  image(birdimg, width / 6, birdY, 50, 50);
+  image(birdimg, width / 6, birdY, 100, 100);
 
   // Pipe management
   if (frameCounter % 100 == 0) {
@@ -72,7 +72,7 @@ void draw() {
 
 // To make the bird jump
 void keyPressed() {
-  if (key == ' ' || key == 'w' || key == 'W') {
+  if (key == ' ' || key == 'w' || key == 'W'|| mousePressed) {
     birdVelocity = lift; // Make bird jump
   }
 }

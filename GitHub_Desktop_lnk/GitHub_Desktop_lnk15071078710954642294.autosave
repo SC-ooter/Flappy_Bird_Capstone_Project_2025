@@ -1,4 +1,4 @@
-     PImage birdimg;
+PImage birdimg;
 float birdY;
 float birdX;
 float birdVelocity = 0;
