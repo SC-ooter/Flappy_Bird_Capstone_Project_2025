@@ -11,6 +11,7 @@ void setup () {
   size(900, 900);
   birdY = height / 2;
   birdimg = loadImage("BIRD-removebg-preview.png");
+  frameRate(60);
 }
 
 void draw() {
@@ -32,9 +33,10 @@ void draw() {
   if (birdY > height - 100 - birdSize) {
     birdY = height - 100 - birdSize;
     birdVelocity = 0;
+    noLoop();   
   }
 
-  // Prevent bird from flying above screen
+  // Prevent bird from flying above screen   
   if (birdY < 0) {
     birdY = 0;
     birdVelocity = 0;
@@ -45,7 +47,7 @@ void draw() {
 
   // Pipe management
   if (frameCounter % 100 == 0) {
-    pipes.add(new Pipe(width, random(200, height - 400), 250)); // Increased gap
+    pipes.add(new Pipe(width, random(200, height - 400), 300)); // Increased gap
   }
   frameCounter++;
 
@@ -62,7 +64,6 @@ void draw() {
 
     // Check for collisions
     if (p.hits(birdY, birdSize)) {
-      println("Game Over");
       noLoop(); // Stop the game
     }
   }
@@ -78,7 +79,7 @@ void keyPressed() {
 // Pipe Class
 class Pipe {
   float x, top, bottom, width;
-  float speed = 5;
+  float speed = 4;
 
   Pipe(float startX, float topHeight, float gapHeight) {
     x = startX;
@@ -103,13 +104,14 @@ class Pipe {
 
   boolean hits(int birdY, int birdSize) {
     // Check if the bird is within the horizontal range of the pipe
-    boolean horizontalCollision = (birdY + birdSize > top && birdY < bottom && width / 6 + 100 > x && width / 6 < x + width);
-
+    boolean horizontalCollision = (width / 6 + birdSize > x && width / 6 < x + width);
+    
+    // Check if the bird is within the vertical range of the pipe
+    boolean verticalCollision = (birdY + birdSize > top && birdY < bottom);
+    
     // Check if the bird hits the top pipe or bottom pipe
-    if (horizontalCollision) {
-      if (birdY < top || birdY + birdSize > bottom) {
-        return true; // Bird hits the pipe (either top or bottom)
-      }
+    if (horizontalCollision && verticalCollision) {
+      return true;
     }
     return false; // No collision
   }
