@@ -1,77 +1,118 @@
 PImage birdimg;
 int birdY;
 int birdVelocity = 0;
-double gravity = 1;
+int gravity = 1;
 int lift = -15;
 int birdSize = 20;
-//int pipeWidth = 50;
-//int pipeGap = 150; 
-// ArrayList<Pipe> pipes = new ArrayList<Pipe>();
+ArrayList<Pipe> pipes = new ArrayList<Pipe>();
+int frameCounter = 0;
 
 void setup () {
-  // This can be the class for the background and ig we can import our images and stuff here too.
-    size(900,900);
-    birdY = height / 2;
-    birdimg = loadImage("BIRD-removebg-preview.png");
-    // bird = new Bird(birdimg, width/6, height/2, 20, 20);
+  size(900, 900);
+  birdY = height / 2;
+  birdimg = loadImage("BIRD-removebg-preview.png");
+  frameRate(60);
 }
 
 void draw() {
-  
   background(255);
-  // Blue sky
-  fill(95, 190, 255);
-  rect(0,0, width, height);
-  
-  // Green ground
-  fill(0, 215, 0);
-  rect(0 , height - 100, width, 100);
 
-  
-  // Updating bird's position 
+  // Sky (blue rectangle)
+  fill(95, 190, 255);
+  rect(0, 0, width, height);
+
+  // Ground (green rectangle)
+  fill(0, 215, 0);
+  rect(0, height - 100, width, 100);
+
+  // Update bird's position
   birdVelocity += gravity;
   birdY += birdVelocity;
-  
-  // Boundary control so the bird does not go below the screen
+
+  // Prevent bird from falling below ground
   if (birdY > height - 100 - birdSize) {
     birdY = height - 100 - birdSize;
     birdVelocity = 0;
+    noLoop();   
   }
-  
-  image(birdimg, width / 6, birdY, 100, 100 );
+
+  // Prevent bird from flying above screen   
+  if (birdY < 0) {
+    birdY = 0;
+    birdVelocity = 0;
+  }
+
+  // Draw bird
+  image(birdimg, width / 6, birdY, 100, 100);
+
+  // Pipe management
+  if (frameCounter % 100 == 0) {
+    pipes.add(new Pipe(width, random(200, height - 400), 300)); // Increased gap
+  }
+  frameCounter++;
+
+  // Update and display pipes
+  for (int i = pipes.size() - 1; i >= 0; i--) {
+    Pipe p = pipes.get(i);
+    p.update();
+    p.show();
+
+    // Remove pipes that are off-screen
+    if (p.offScreen()) {
+      pipes.remove(i);
+    }
+
+    // Check for collisions
+    if (p.hits(birdY, birdSize)) {
+      noLoop(); // Stop the game
+    }
+  }
 }
 
 // To make the bird jump
 void keyPressed() {
   if (key == ' ' || key == 'w' || key == 'W') {
-    birdVelocity = lift;
+    birdVelocity = lift; // Make bird jump
   }
 }
 
+// Pipe Class
+class Pipe {
+  float x, top, bottom, width;
+  float speed = 4;
 
-class Bird {
-  double x, y, velocity, size;
-  PImage img;
-  
-  Bird(double startX, double startY, double birdSize, PImage birdImg) {
+  Pipe(float startX, float topHeight, float gapHeight) {
     x = startX;
-    y = startY;
-    velocity = 0;
-    size = birdSize;
-    img = birdImg;
+    top = topHeight;
+    bottom = gapHeight;
+    width = 50;
   }
-  
+
   void update() {
-    velocity += gravity;
-    y += velocity;
-    if (y > height - size) {
-      y = height - size;
-      velocity = 0;
-    }
+    x -= speed; // Move pipe to the left
   }
-  
-  void jump() {
-    velocity = lift;
+
+  void show() {
+    fill(0, 255, 0);
+    rect(x, 0, width, top); // Top pipe
+    rect(x, bottom, width, height - bottom); // Bottom pipe
+  }
+
+  boolean offScreen() {
+    return x + width < 0; // Check if the pipe is off-screen
+  }
+
+  boolean hits(int birdY, int birdSize) {
+    // Check if the bird is within the horizontal range of the pipe
+    boolean horizontalCollision = (width / 2 + birdSize > x && width / 2 < x + width);
+    
+    // Check if the bird is within the vertical range of the pipe
+    boolean verticalCollision = (birdY + birdSize > top && birdY < bottom);
+    
+    // Check if the bird hits the top pipe or bottom pipe
+    if (horizontalCollision && verticalCollision) {
+      return true;
+    }
+    return false; // No collision
   }
 }
-  
