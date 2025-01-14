@@ -1,0 +1,114 @@
+     PImage birdimg;
+float birdY;
+float birdX;
+float birdVelocity = 0;
+float gravity = 1;
+float lift = -15;
+float birdSize = 20;
+ArrayList<Pipe> pipes = new ArrayList<Pipe>();
+float frameCounter = 0;
+
+void setup () {
+  size(900, 900);
+  birdY = height / 2;
+  birdimg = loadImage("BIRD-removebg-preview.png");
+  frameRate(60);
+}
+
+void draw() {
+  background(255);
+
+  // Sky (blue rectangle)
+  fill(95, 190, 255);
+  rect(0, 0, width, height);
+
+  // Ground (green rectangle)
+  fill(0, 215, 0);
+  rect(0, height - 100, width, 100);
+
+  // Update bird's position
+  birdVelocity += gravity;
+  birdY += birdVelocity;
+
+  // Prevent bird from falling below ground
+  if (birdY > height - 100 - birdSize) {
+    birdY = height - 100 - birdSize;
+    birdVelocity = 0;
+    noLoop();   
+  }
+
+  // Prevent bird from flying above screen   
+  if (birdY < 0) {
+    birdY = 0;
+    birdVelocity = 0;
+  }
+
+  // Draw bird
+  image(birdimg, width / 6, birdY, 100, 100);
+
+  // Pipe management
+  if (frameCounter % 100 == 0) {
+    pipes.add(new Pipe(width, random(200, height - 200), 50, 200)); // Increased gap
+  }
+  frameCounter++;
+
+  // Update and display pipes
+  for (int i = pipes.size() - 1; i >= 0; i--) {
+    Pipe p = pipes.get(i);
+    p.update();
+    p.show();
+
+    // Remove pipes that are off-screen
+    if (p.offScreen()) {
+      pipes.remove(i);
+    }
+
+    // Check for collisions
+    if (p.collides(birdX, birdY, birdSize)) {
+      noLoop(); // Stop the game
+    }
+  }
+}
+
+// To make the bird jump
+void keyPressed() {
+  if (key == ' ' || key == 'w' || key == 'W') {
+    birdVelocity = lift; // Make bird jump
+  }
+}
+
+// Pipe Class
+class Pipe {
+  float x, y, w, gap;
+
+  Pipe(float startX, float startY, float pipeWidth, float gapHeight) {
+    x = startX;
+    y = startY;
+    w = pipeWidth;
+    gap = gapHeight;
+  }
+
+  void update() {
+    x -= 2; // Move pipe to the left
+  }
+
+  void show() {
+    fill(0, 255, 0);
+    rect(x, 0, w, y); // Top pipe
+    rect(x, y + gap, w, height - y - gap); // Bottom pipe
+  }
+
+  boolean offScreen() {
+    return x + width < 0; // Check if the pipe is off-screen
+  }
+
+  boolean collides(float birdX, float birdY, float birdSize) {    
+    // Check if the bird hits the top pipe or bottom pipe
+    if (birdX + birdSize > x && birdX < x + w) {
+      if (birdY < y || birdY + birdSize > y + gap) {
+        return true;
+      }
+    }
+    return false; // No collision
+  }
+}
