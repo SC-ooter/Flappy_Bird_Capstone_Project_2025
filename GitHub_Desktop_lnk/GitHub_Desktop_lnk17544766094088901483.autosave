@@ -1,5 +1,5 @@
 PImage birdimg;
-PImage groundimg;
+//PImage groundimg;
 float birdY;
 float birdX;
 float birdVelocity = 0;
@@ -14,13 +14,14 @@ void setup () {
   size(900, 900);
   birdY = height / 2;
   birdimg = loadImage("BIRD-removebg-preview.png");
-  groundimg = loadImage("FlappyBG.png");
+  //groundimg = loadImage("FlappyBG.png");
   frameRate(60);
-}
+} 
 
 void draw() {
   background(255);
-  image(groundimg, 0, 0, 900, 900);
+  System.out.println("Your score is: " + score);
+  //image(groundimg, 0, 0, 900, 900);
 
   // // Sky (blue rectangle)
   // fill(95, 190, 255);
@@ -62,30 +63,18 @@ void draw() {
     p.update();
     p.show();
 
-    if (!p.scored && p.x + p.w < width / 6) {
-      score++;
-      p.scored = true;
-    }
-
     // Remove pipes that are off-screen
     if (p.offScreen()) {
       pipes.remove(i);
+      score +=1;
+      
     } 
 
     // Check for collisions
     if (p.collides(width / 6, birdY, birdSize)) {
       noLoop(); // Stop the game
     }
-
-    // Display score
-    fill(255);
-    textSize(30);
-    text("Score " + score, 20, 40);
   }
-}
-
-void display() {
-
 }
 
 // To make the bird jump
@@ -98,7 +87,6 @@ void keyPressed() {
 // Pipe Class
 class Pipe {
   float x, y, w, gap;
-  boolean scored = false; // Tracking the score 
 
   Pipe(float startX, float startY, float pipeWidth, float gapHeight) {
     x = startX;
@@ -108,16 +96,13 @@ class Pipe {
   }
 
   void update() {
-    x -= 4; // Move pipe to the left
-    if (score >= 20) {
-      x -= 4.1;
-    }
+    x -= 3; // Move pipe to the left
   }
 
   void show() {
     fill(0, 255, 0);
     rect(x, 0, w, y); // Top pipe
-    rect(x, y + gap, w, height - y - gap); // Bottom pipe
+    rect(x, y + gap, w, height - y - gap + gap); // Bottom pipe
   }
 
   boolean offScreen() {

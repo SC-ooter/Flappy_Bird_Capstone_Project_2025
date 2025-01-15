@@ -1,4 +1,4 @@
-PImage birdimg;
+       PImage birdimg;
 PImage groundimg;
 float birdY;
 float birdX;
@@ -57,15 +57,28 @@ void draw() {
   frameCounter++;
 
   // Update and display pipes
-  for (int i = pipes.size() - 1; i >= 0; i--) {
+  // for (int i = pipes.size() - 1; i >= 0; i--) {
+  //   Pipe p = pipes.get(i);
+  //   p.update();
+  //   p.show();
+
+  //   // Remove pipes that are off-screen
+  //   if (p.offScreen()) {
+  //     pipes.remove(i);
+  //   } 
+
+  //   // Check for collisions
+  //   if (p.collides(width / 6, birdY, birdSize)) {
+  //     noLoop(); // Stop the game
+  //   }
+  // }
+}
+
+void display() {
+for (int i = pipes.size() - 1; i >= 0; i--) {
     Pipe p = pipes.get(i);
     p.update();
     p.show();
-
-    if (!p.scored && p.x + p.w < width / 6) {
-      score++;
-      p.scored = true;
-    }
 
     // Remove pipes that are off-screen
     if (p.offScreen()) {
@@ -76,16 +89,7 @@ void draw() {
     if (p.collides(width / 6, birdY, birdSize)) {
       noLoop(); // Stop the game
     }
-
-    // Display score
-    fill(255);
-    textSize(30);
-    text("Score " + score, 20, 40);
   }
-}
-
-void display() {
-
 }
 
 // To make the bird jump
@@ -98,7 +102,6 @@ void keyPressed() {
 // Pipe Class
 class Pipe {
   float x, y, w, gap;
-  boolean scored = false; // Tracking the score 
 
   Pipe(float startX, float startY, float pipeWidth, float gapHeight) {
     x = startX;
@@ -108,16 +111,13 @@ class Pipe {
   }
 
   void update() {
-    x -= 4; // Move pipe to the left
-    if (score >= 20) {
-      x -= 4.1;
-    }
+    x -= 3; // Move pipe to the left
   }
 
   void show() {
     fill(0, 255, 0);
     rect(x, 0, w, y); // Top pipe
-    rect(x, y + gap, w, height - y - gap); // Bottom pipe
+    rect(x, y + gap, w, height - y - gap + gap); // Bottom pipe
   }
 
   boolean offScreen() {
