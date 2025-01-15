@@ -41,17 +41,17 @@ void draw() {
   }
 
   // Prevent bird from flying above screen   
-  if (birdY < 0) {
-    birdY = 0;
-    birdVelocity = 0;
-  }
+  //if (birdY < 0) {
+  //  birdY = 0;
+  //  birdVelocity = 0;
+  //}
 
   // Draw bird
   image(birdimg, width / 6, birdY, 50, 40);
 
   // Pipe management
   if (frameCounter % 100 == 0) {
-    pipes.add(new Pipe(width, random(100, height - 100), 50, 200)); // Increased gap
+    pipes.add(new Pipe(width, random(150, height - 300), 50, 200)); // Increased gap
   }
   frameCounter++;
 
