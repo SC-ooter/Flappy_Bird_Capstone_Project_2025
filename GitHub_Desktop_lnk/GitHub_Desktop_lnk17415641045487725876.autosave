@@ -41,9 +41,6 @@ void draw() {
     birdVelocity = 0;
     noLoop();   
     gameOver = true;
-    fill(255, 0, 0);
-    textSize(40);
-    text("\tGAME OVER\nPRESS SPACE OR W TO RESTART", 100, 100 );
   }
 
   // Prevent bird from flying above screen   
@@ -57,7 +54,7 @@ void draw() {
 
   // Pipe generation
   if (frameCounter % 100 == 0) {
-    pipes.add(new Pipe(width, random(255, height - 300), 50, 200)); // Fix pipes generating below the ground
+    pipes.add(new Pipe(width, random(150, height - 300), 50, 200)); // Increased gap
   }
   frameCounter++;
 
@@ -81,9 +78,6 @@ void draw() {
     if (p.collides(width / 6, birdY, birdSize)) {
       gameOver = true;
       noLoop(); // Stop the game
-      fill(255, 0, 0);
-      textSize(40);
-      text("\tGAME OVER\nPRESS SPACE OR W TO RESTART", 100, 100 );
     } 
 
     // Display score
@@ -91,13 +85,19 @@ void draw() {
     textSize(30);
     text("Score " + score, 20, 40);
   }
+  
+
 }
+
 
 // To make the bird jump
 void keyPressed() {
   if (key == ' ' || key == 'w' || key == 'W') {
     if (gameOver) {
       gameOver = false;
+      fill(255, 0, 0);
+      textSize(100);
+      text("GAME OVER\nPRESS SPACE OR W TO RESTART");
       birdY = height / 2;
       birdVelocity = 0;
       score = 0;
@@ -107,7 +107,7 @@ void keyPressed() {
 
     } else {
     birdVelocity = lift; // Make bird jump
-    }
+    } 
   } 
 }
 
@@ -123,10 +123,10 @@ class Pipe {
     gap = gapHeight;
   }
 
-  void update() { // fix the speed up and keep gaps between pipes consistent 
+  void update() {
     x -= 4; // Move pipe to the left
     if (score >= 20) {
-      x -= 4.5;
+      x -= 4.1;
     }
   }
 
