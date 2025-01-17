@@ -11,7 +11,7 @@ float frameCounter = 0;
 int score = 0;
 boolean gameOver = false;
 boolean gameStarted = false;
-float speed = 4;
+float speed = 4; 
 
 void setup () {
   size(900, 900);
@@ -29,6 +29,7 @@ void draw() {
   fill(0, 215, 0);
   rect(0, height - 100, width, 100);
   
+  // Game start function so that the bird does not fall after starting game
   if (!gameStarted) {
     fill(0, 215, 0);
     textSize(40);
@@ -78,7 +79,7 @@ void draw() {
       speed += 0.1;
     }
 
-    // Remove pipes that are off-screen
+    // Remove pipes that are off the screen
     if (p.offScreen()) {
       pipes.remove(i);
     } 
@@ -112,8 +113,9 @@ void keyPressed() {
       loop();
 
     } 
+    // Checking if the user started the game
     else if (!gameStarted) {
-      gameStarted = true;
+      gameStarted = true; 
     } else {
     birdVelocity = lift; // Make bird jump
     }
@@ -124,7 +126,8 @@ void keyPressed() {
 class Pipe {
   float x, y, w, gap;
   boolean scored = false; // Tracking the score 
-
+  
+  // Pipe generator 
   Pipe(float startX, float startY, float pipeWidth, float gapHeight) {
     x = startX;
     y = startY;
@@ -150,7 +153,7 @@ class Pipe {
     // Check if the bird hits the top pipe or bottom pipe
     if (birdX + birdSize > x && birdX < x + w) {
       if (birdY < y || birdY + birdSize > y + gap) {
-        return true;
+        return true; // Collision occurs
       }
     }
     return false; // No collision
