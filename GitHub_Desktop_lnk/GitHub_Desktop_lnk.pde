@@ -50,6 +50,7 @@ void draw() {
     fill(255, 0, 0);
     textSize(40);
     text("\tGAME OVER\nPRESS SPACE OR W TO RESTART", 100, 100 );
+    speed = 4;
   }
 
   // Prevent bird from flying above screen   
