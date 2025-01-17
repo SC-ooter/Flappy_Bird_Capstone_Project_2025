@@ -25,10 +25,6 @@ void setup () {
 void draw() {
   background(255);
   image(groundimg, 0, 0, 900, 900);
-
-  // Ground (green rectangle)
-  fill(0, 215, 0);
-  rect(0, height - 100, width, 100);
   
   // Game start function so that the bird does not fall after starting game
   if (!gameStarted) {
@@ -48,7 +44,7 @@ void draw() {
     birdVelocity = 0;
     noLoop();   
     gameOver = true;
-    fill(255, 0, 0);
+    fill(0, 0, 0);
     textSize(40);
     text("\tGAME OVER\nPRESS SPACE OR W TO RESTART", 100, 100 );
     speed = 4; 
@@ -78,7 +74,7 @@ void draw() {
     if (!p.scored && p.x + p.w < width / 6) {
       score++;
       p.scored = true;
-      speed += 0.1;
+      speed += 0.05;
     }
 
     // Remove pipes that are off the screen
@@ -90,17 +86,20 @@ void draw() {
     if (p.collides(width / 6, birdY, birdSize)) {
       gameOver = true;
       noLoop(); // Stop the game
-      fill(255, 0, 0);
+      fill(0, 0, 0);
       textSize(40);
       text("\tGAME OVER\nPRESS SPACE OR W TO RESTART", 100, 100 );
       speed = 4;
     } 
+      // Ground (green rectangle)
+    fill(0, 215, 0);
+    rect(0, height - 80, width, 100);
 
     // Display score
     fill(255);
     textSize(30);
-    text("Score " + score, 20, 40);
-    text("Speed " + speed, 20, 70);
+    text("Score: " + score, 20, 40);
+    text("Speed: " + speed, 20, 70);
   }
 }
 
@@ -144,7 +143,7 @@ class Pipe {
   }
 
   void show() {
-    fill(0, 255, 0);
+    fill(255, 0, 0);
     rect(x, 0, w, y); // Top pipe
     rect(x, y + gap, w, height - y - gap); // Bottom pipe
   }
