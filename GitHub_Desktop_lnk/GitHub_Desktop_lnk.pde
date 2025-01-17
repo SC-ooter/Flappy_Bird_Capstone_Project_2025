@@ -10,6 +10,8 @@ ArrayList<Pipe> pipes = new ArrayList<Pipe>();
 float frameCounter = 0;
 int score = 0;
 boolean gameOver = false;
+boolean gameStarted = false;
+float speed = 4;
 
 void setup () {
   size(900, 900);
@@ -23,13 +25,16 @@ void draw() {
   background(255);
   image(groundimg, 0, 0, 900, 900);
 
-  // // Sky (blue rectangle)
-  // fill(95, 190, 255);
-  // rect(0, 0, width, height);
-
   // Ground (green rectangle)
   fill(0, 215, 0);
   rect(0, height - 100, width, 100);
+  
+  if (!gameStarted) {
+    fill(0, 215, 0);
+    textSize(40);
+    text("PRESS SPACE OR W TO START", 200, height / 6);
+    return;
+  }
 
   // Update bird's position
   birdVelocity += gravity;
@@ -57,7 +62,7 @@ void draw() {
 
   // Pipe generation
   if (frameCounter % 100 == 0) {
-    pipes.add(new Pipe(width, random(255, height - 300), 50, 200)); // Fix pipes generating below the ground
+    pipes.add(new Pipe(width, random(200, height - 400), 70, 200)); // Fix pipes generating below the ground
   }
   frameCounter++;
 
@@ -70,6 +75,7 @@ void draw() {
     if (!p.scored && p.x + p.w < width / 6) {
       score++;
       p.scored = true;
+      speed += 0.1;
     }
 
     // Remove pipes that are off-screen
@@ -105,6 +111,9 @@ void keyPressed() {
       frameCounter = 0;
       loop();
 
+    } 
+    else if (!gameStarted) {
+      gameStarted = true;
     } else {
     birdVelocity = lift; // Make bird jump
     }
@@ -124,10 +133,7 @@ class Pipe {
   }
 
   void update() { // fix the speed up and keep gaps between pipes consistent 
-    x -= 4; // Move pipe to the left
-    if (score >= 20) {
-      x -= 4.5;
-    }
+    x -= speed; // Move pipe to the left
   }
 
   void show() {
