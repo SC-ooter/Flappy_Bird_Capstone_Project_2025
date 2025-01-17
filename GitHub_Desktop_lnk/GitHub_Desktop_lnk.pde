@@ -65,7 +65,7 @@ void draw() {
 
   // Pipe generation
   if (frameCounter % 100 == 0) {
-    pipes.add(new Pipe(width, random(200, height - 400), 70, 200)); // Fix pipes generating below the ground
+    pipes.add(new Pipe(width, random(200, height - 400), 80, 200)); // Fix pipes generating below the ground
   }
   frameCounter++;
 
@@ -93,13 +93,14 @@ void draw() {
       fill(255, 0, 0);
       textSize(40);
       text("\tGAME OVER\nPRESS SPACE OR W TO RESTART", 100, 100 );
+      speed = 4;
     } 
 
     // Display score
     fill(255);
     textSize(30);
     text("Score " + score, 20, 40);
-    print(speed);
+    text("Speed " + speed, 20, 70);
   }
 }
 
