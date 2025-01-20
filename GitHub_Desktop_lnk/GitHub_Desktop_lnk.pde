@@ -12,6 +12,7 @@ int score = 0;
 boolean gameOver = false;
 boolean gameStarted = false;
 float speed = 4; 
+float pipeSpawnX = width;
 // GitHub Updated
 
 void setup () {
@@ -61,12 +62,12 @@ void draw() {
   image(birdimg, width / 6, birdY, 50, 40);
 
   // Pipe generation
-  if (frameCounter % 100 == 0) {
+  if (frameCounter % 90 == 0) {
     pipes.add(new Pipe(width, random(50, height - 400), 80, 200)); // Fix pipes generating below the ground
   }
   frameCounter++;
 
-  // Update and display pipes
+  // Update and display pipes 
   for (int i = pipes.size() - 1; i >= 0; i--) {
     Pipe p = pipes.get(i);
     p.update();
