@@ -1,5 +1,6 @@
 PImage birdimg;
 PImage groundimg;
+PFont Myfont;
 float birdY;
 float birdX;
 float birdVelocity = 0;
@@ -21,6 +22,8 @@ void setup () {
   birdimg = loadImage("BIRD-removebg-preview.png");
   groundimg = loadImage("FlappyBG.png");
   frameRate(60);
+  Myfont = createFont("Berlin Sans FB Demi", 40);
+  textFont(Myfont);
 }
 
 void draw() {
@@ -29,7 +32,7 @@ void draw() {
   
   // Game start function so that the bird does not fall after starting game
   if (!gameStarted) {
-    fill(0, 215, 0);
+    fill(0);
     textSize(40);
     text("PRESS SPACE OR W TO START", 200, height / 6);
     return;
@@ -47,7 +50,7 @@ void draw() {
     gameOver = true;
     fill(0, 0, 0);
     textSize(40);
-    text("GAME OVER" , 300, 300 );
+    text("GAME OVER" , 350, 300 );
     text("PRESS SPACE OR W TO RESTART GAME", 140, 350);
     speed = 4; 
   }
@@ -76,7 +79,7 @@ void draw() {
     if (!p.scored && p.x + p.w < width / 6) {
       score++;
       p.scored = true;
-      speed += 0.05;
+      speed += 0.025;
     }
 
     // Remove pipes that are off the screen
@@ -88,9 +91,9 @@ void draw() {
     if (p.collides(width / 6, birdY, birdSize)) {
       gameOver = true;
       noLoop(); // Stop the game
-      fill(0, 0, 0);
+      fill(0);
       textSize(40);
-      text("GAME OVER" , 300, 300 );
+      text("GAME OVER" , 350, 300 );
       text("PRESS SPACE OR W TO RESTART GAME", 140, 350);
       speed = 4;
     } 
@@ -102,7 +105,6 @@ void draw() {
     fill(255);
     textSize(30);
     text("Score: " + score, 20, 40);
-    text("Speed: " + speed, 20, 70);
   }
 }
 
