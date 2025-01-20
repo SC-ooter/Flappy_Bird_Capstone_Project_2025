@@ -13,7 +13,6 @@ int score = 0;
 boolean gameOver = false;
 boolean gameStarted = false;
 float speed = 4; 
-float pipeSpawnX = width;
 // GitHub Updated
 
 void setup () {
