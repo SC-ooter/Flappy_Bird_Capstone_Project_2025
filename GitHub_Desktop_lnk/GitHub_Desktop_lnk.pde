@@ -13,7 +13,8 @@ int score = 0;
 boolean gameOver = false;
 boolean gameStarted = false;
 float speed = 4; 
-// GitHub Updated
+// GitHub Updated 
+// Game development finished on January 21, 2025
 
 void setup () {
   size(900, 900);
