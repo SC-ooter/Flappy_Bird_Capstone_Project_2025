@@ -17,17 +17,17 @@ Uh yeah it's good.
 - 
 
 -------------------------------------
-## External Programmer Feedback (Name: ) 
+## External Programmer Feedback (Name: William ) 
 ### Programs/Issues that occurred while testing:
-- 
-- 
+- pipes were very low at some points, it was challenging to not hit the ground.
+- distance between pipes is consistent, it could be variable
 - 
 
 ### What is your general thoughts and feedback about the program?
-
+I think it is very good and smooth program with little to no errors or issues that could surface. Ultimately there isn't much that needs to change. 
 
 ### Coding Team - What we did in response to this feedback?
-- 
+- Fixed pipe generation and added tweaks to the program.
 - 
 
 -------------------------------------
